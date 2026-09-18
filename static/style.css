@@ -1,0 +1,206 @@
+
+/* =========================
+   พื้นฐาน
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, "Tahoma", sans-serif;
+    background: #f7f7f7;
+    color: #222;
+}
+
+
+/* =========================
+   Container
+========================= */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 44px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 20px;
+}
+
+
+/* =========================
+   Info Box
+========================= */
+
+.info-box {
+    background: #fff8df;
+    border: 1px solid #eadb9b;
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+
+/* =========================
+   Upload Section
+========================= */
+
+.upload-section {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.upload-section h2 {
+    margin-top: 0;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 15px 0;
+}
+
+
+/* =========================
+   Button
+========================= */
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 22px;
+    font-size: 17px;
+    cursor: pointer;
+    background: #ff9f1c;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   Content
+========================= */
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+
+/* =========================
+   Card
+========================= */
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+
+/* =========================
+   Image
+========================= */
+
+.image-preview {
+    min-height: 300px;
+    border: 2px dashed #ddd;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.image-preview img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+
+/* =========================
+   Result
+========================= */
+
+.result {
+    min-height: 300px;
+    border: 2px dashed #ddd;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   Loading
+========================= */
+
+.loading {
+    padding: 15px;
+    background: #fff8df;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 800px) {
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 34px;
+    }
+
+}
+

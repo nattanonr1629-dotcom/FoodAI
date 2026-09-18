@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Food Recipe AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- =========================
+             Header
+        ========================== -->
+
+        <header>
+
+            <h1>🍳 Food Recipe AI</h1>
+
+            <p>
+                🤖 ระบบวิเคราะห์อาหารและแนะนำสูตรอาหารด้วย AI
+            </p>
+
+        </header>
+
+
+        <!-- =========================
+             Information
+        ========================== -->
+
+        <div class="info-box">
+
+            📷 อัปโหลดรูปอาหาร แล้วให้ AI วิเคราะห์
+            ชื่อเมนู วัตถุดิบ วิธีทำ โภชนาการ
+            และเมนูใกล้เคียง
+
+        </div>
+
+
+        <!-- =========================
+             Upload
+        ========================== -->
+
+        <section class="upload-section">
+
+            <h2>📷 เลือกรูปอาหาร</h2>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept=".jpg,.jpeg,.png"
+            >
+
+            <button id="analyzeButton">
+
+                🤖 วิเคราะห์อาหาร
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             Main Content
+        ========================== -->
+
+        <div class="content">
+
+            <!-- รูปอาหาร -->
+
+            <div class="card">
+
+                <h2>📸 รูปอาหาร</h2>
+
+                <div id="imagePreview"
+                     class="image-preview">
+
+                    <p>
+                        ยังไม่ได้เลือกรูปอาหาร
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ผลลัพธ์ -->
+
+            <div class="card">
+
+                <h2>🤖 Food Recipe AI</h2>
+
+                <div id="loading"
+                     class="loading hidden">
+
+                    🤖 AI กำลังวิเคราะห์รูปอาหาร...
+
+                </div>
+
+                <div id="result"
+                     class="result">
+
+                    <p>
+                        ผลการวิเคราะห์จะแสดงที่นี่
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
