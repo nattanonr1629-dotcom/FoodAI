@@ -1,10 +1,8 @@
-
 const imageInput = document.getElementById("imageInput");
 const imagePreview = document.getElementById("imagePreview");
 const analyzeButton = document.getElementById("analyzeButton");
 const loading = document.getElementById("loading");
 const result = document.getElementById("result");
-
 
 // =========================
 // แสดงตัวอย่างรูป
@@ -12,25 +10,26 @@ const result = document.getElementById("result");
 
 imageInput.addEventListener("change", function () {
 
-    const file = imageInput.files[0];
 
-    if (!file) {
-        imagePreview.innerHTML =
-            "<p>ยังไม่ได้เลือกรูปอาหาร</p>";
+const file = imageInput.files[0];
 
-        return;
-    }
+if (!file) {
+    imagePreview.innerHTML =
+        "<p>ยังไม่ได้เลือกรูปอาหาร</p>";
+    return;
+}
 
-    const imageURL = URL.createObjectURL(file);
+const imageURL = URL.createObjectURL(file);
 
-    imagePreview.innerHTML = `
-        <img src="${imageURL}" alt="รูปอาหาร">
-    `;
+imagePreview.innerHTML = `
+    <img src="${imageURL}" alt="รูปอาหาร">
+`;
 
-    result.innerHTML =
-        "<p>พร้อมวิเคราะห์รูปอาหาร</p>";
+result.innerHTML =
+    "<p>พร้อมวิเคราะห์รูปอาหาร</p>";
+
+
 });
-
 
 // =========================
 // วิเคราะห์อาหาร
@@ -38,84 +37,80 @@ imageInput.addEventListener("change", function () {
 
 analyzeButton.addEventListener("click", async function () {
 
-    const file = imageInput.files[0];
 
-    if (!file) {
+const file = imageInput.files[0];
 
-        alert("กรุณาเลือกรูปอาหารก่อน");
+if (!file) {
+    alert("กรุณาเลือกรูปอาหารก่อน");
+    return;
+}
 
-        return;
-    }
+// ป้องกันการกดซ้ำ
+analyzeButton.disabled = true;
 
+// แสดง Loading
+loading.classList.remove("hidden");
 
-    // ป้องกันการกดซ้ำ
+result.innerHTML = "";
 
-    analyzeButton.disabled = true;
+// สร้าง FormData
+const formData = new FormData();
 
-    loading.classList.remove("hidden");
-
-    result.innerHTML = "";
-
-
-    // สร้าง FormData
-
-    const formData = new FormData();
-
-    formData.append("image", file);
+// ต้องตรงกับ request.files["image"] ใน app.py
+formData.append("image", file);
 
 
-    try {
+try {
 
-        const response = await fetch(
-            "/analyze",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
-
-
-        const data = await response.json();
-
-
-        if (data.success) {
-
-            result.innerHTML = `
-                <div class="ai-result">
-                    ${formatResult(data.result)}
-                </div>
-            `;
-
-        } else {
-
-            result.innerHTML = `
-                <p>
-                    ❌ ${data.error}
-                </p>
-            `;
-
+    const response = await fetch(
+        "/analyze",
+        {
+            method: "POST",
+            body: formData
         }
+    );
 
-    } catch (error) {
+
+    const data = await response.json();
+
+
+    if (data.success) {
+
+        result.innerHTML = `
+            <div class="ai-result">
+                ${formatResult(data.result)}
+            </div>
+        `;
+
+    } else {
 
         result.innerHTML = `
             <p>
-                ❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้
+                ❌ ${data.error}
             </p>
         `;
-
-        console.error(error);
-
-    } finally {
-
-        loading.classList.add("hidden");
-
-        analyzeButton.disabled = false;
-
     }
 
-});
 
+} catch (error) {
+
+    result.innerHTML = `
+        <p>
+            ❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้
+        </p>
+    `;
+
+    console.error(error);
+
+} finally {
+
+    loading.classList.add("hidden");
+
+    analyzeButton.disabled = false;
+}
+
+
+});
 
 // =========================
 // จัดรูปแบบผลลัพธ์
@@ -123,12 +118,14 @@ analyzeButton.addEventListener("click", async function () {
 
 function formatResult(text) {
 
-    return text
-        .replace(/\n/g, "<br>")
-        .replace(/1\./g, "<br><strong>1.</strong>")
-        .replace(/2\./g, "<br><strong>2.</strong>")
-        .replace(/3\./g, "<br><strong>3.</strong>")
-        .replace(/4\./g, "<br><strong>4.</strong>")
-        .replace(/5\./g, "<br><strong>5.</strong>");
+
+return text
+    .replace(/\n/g, "<br>")
+    .replace(/1\./g, "<br><strong>1.</strong>")
+    .replace(/2\./g, "<br><strong>2.</strong>")
+    .replace(/3\./g, "<br><strong>3.</strong>")
+    .replace(/4\./g, "<br><strong>4.</strong>")
+    .replace(/5\./g, "<br><strong>5.</strong>");
+
 
 }
